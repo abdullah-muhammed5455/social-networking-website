@@ -23,7 +23,7 @@ axios.get("https://tarmeezacademy.com/api/v1/posts").then(function(res){
             </div>
           </div>
       `
-      document.getElementById("posts").innerHTML += content;
+      document.getElementById("apiPosts").innerHTML += content;
   }
 })
 
@@ -148,15 +148,11 @@ let content = `
             </div>
 `
 
-document.getElementById('posts').innerHTML += content;
+document.getElementById('selfPosts').innerHTML += content;
 if(content != null){
   array3.push(content);
 }
 addArrayToLocalStorage(array3);
-
-setTimeout(()=>{
-  location.reload();
-  },5000);
 
 document.getElementById('newPost-alert').style.visibility = 'visible';
 setTimeout(()=>{
@@ -173,13 +169,13 @@ localStorage.setItem('array',JSON.stringify(array3));
 function getDataFromLocalStorage(){
 let result = JSON.parse(localStorage.getItem('array'));
   result.forEach((selfPost) => {
-  document.getElementById('posts').innerHTML += selfPost
+  document.getElementById('selfPosts').innerHTML += selfPost
 });
 }
 
 function deleteBtn(id){
 let card = document.getElementById(`${id}`);
-let posts = document.getElementById('posts');
+let posts = document.getElementById('selfPosts');
 for(let i = 0; i < posts.childElementCount;i++){
   if(posts.children[i] === card){
     posts.removeChild(card);
@@ -196,6 +192,7 @@ function deleteFromLocalStorage(i){
 array3.splice(i,1);
 addArrayToLocalStorage(array3);
 }
+
 
 // localStorage.removeItem('array');
 setUpUi();
